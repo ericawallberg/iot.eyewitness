@@ -1,0 +1,1081 @@
+[{
+  "logId" : 17249068974,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 2000,
+  "activeDuration" : 1000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "10/04/18 13:16:25",
+  "startTime" : "10/01/18 15:52:59",
+  "originalStartTime" : "10/01/18 15:52:59",
+  "originalDuration" : 2000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050071,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 15000,
+  "activeDuration" : 12000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050071?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/07/18 19:37:23",
+  "originalStartTime" : "10/07/18 19:37:23",
+  "originalDuration" : 15000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050079,
+  "activityName" : "Bike",
+  "activityTypeId" : 90001,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 4,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 12,
+  "distance" : 0.688976,
+  "distanceUnit" : "Mile",
+  "duration" : 240000,
+  "activeDuration" : 236000,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050079?export=tcx",
+  "speed" : 10.509803389830507,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/07/18 20:16:46",
+  "originalStartTime" : "10/07/18 20:16:46",
+  "originalDuration" : 240000,
+  "elevationGain" : 10.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050073,
+  "activityName" : "Workout",
+  "activityTypeId" : 3000,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "duration" : 5000,
+  "activeDuration" : 5000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/07/18 23:40:12",
+  "originalStartTime" : "10/07/18 23:40:12",
+  "originalDuration" : 5000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050080,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 31000,
+  "activeDuration" : 27000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050080?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/07/18 23:41:05",
+  "originalStartTime" : "10/07/18 23:41:05",
+  "originalDuration" : 31000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050077,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 3,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 10,
+  "distance" : 0.075913,
+  "distanceUnit" : "Mile",
+  "duration" : 195000,
+  "activeDuration" : 195000,
+  "steps" : 205,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 1.401470769230769,
+  "pace" : 2568.729993545243,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/08/18 00:03:18",
+  "originalStartTime" : "10/08/18 00:03:18",
+  "originalDuration" : 195000,
+  "elevationGain" : 0.0,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050078,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 8000,
+  "activeDuration" : 6000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050078?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/08/18 00:15:21",
+  "originalStartTime" : "10/08/18 00:15:21",
+  "originalDuration" : 8000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050067,
+  "activityName" : "Bike",
+  "activityTypeId" : 90001,
+  "activityLevel" : [{
+    "minutes" : 1,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.016074,
+  "distanceUnit" : "Mile",
+  "duration" : 67000,
+  "activeDuration" : 63000,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050067?export=tcx",
+  "speed" : 0.9185142857142857,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/08/18 02:38:10",
+  "originalStartTime" : "10/08/18 02:38:10",
+  "originalDuration" : 67000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050075,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 14000,
+  "activeDuration" : 11000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/09/18 00:11:21",
+  "originalStartTime" : "10/09/18 00:11:21",
+  "originalDuration" : 14000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050082,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 1,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 1,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 107000,
+  "activeDuration" : 106000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/09/18 00:19:56",
+  "originalStartTime" : "10/09/18 00:19:56",
+  "originalDuration" : 107000,
+  "elevationGain" : 0.0,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050081,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 14000,
+  "activeDuration" : 13000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050081?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/09/18 01:47:39",
+  "originalStartTime" : "10/09/18 01:47:39",
+  "originalDuration" : 14000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050070,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 1,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 85000,
+  "activeDuration" : 84000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050070?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/09/18 01:48:19",
+  "originalStartTime" : "10/09/18 01:48:19",
+  "originalDuration" : 85000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050068,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 13,
+    "name" : "sedentary"
+  },{
+    "minutes" : 2,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 17,
+  "distance" : 0.006536,
+  "distanceUnit" : "Mile",
+  "duration" : 909000,
+  "activeDuration" : 907000,
+  "steps" : 33,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050068?export=tcx",
+  "speed" : 0.025942227122381475,
+  "pace" : 138769.88984088128,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/09/18 17:24:42",
+  "originalStartTime" : "10/09/18 17:24:42",
+  "originalDuration" : 909000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050076,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 4000,
+  "activeDuration" : 4000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:55",
+  "startTime" : "10/09/18 22:35:48",
+  "originalStartTime" : "10/09/18 22:35:48",
+  "originalDuration" : 4000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 17419050069,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 3,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 8,
+  "distance" : 0.017261,
+  "distanceUnit" : "Mile",
+  "duration" : 201000,
+  "activeDuration" : 198000,
+  "steps" : 133,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050069?export=tcx",
+  "speed" : 0.31383636363636364,
+  "pace" : 11470.946063379875,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/10/18 17:42:30",
+  "originalStartTime" : "10/10/18 17:42:30",
+  "originalDuration" : 201000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050072,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 1,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 2,
+  "distance" : 0.008363,
+  "distanceUnit" : "Mile",
+  "duration" : 105000,
+  "activeDuration" : 103000,
+  "steps" : 4,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050072?export=tcx",
+  "speed" : 0.29229902912621364,
+  "pace" : 12316.154490015544,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/10/18 21:11:06",
+  "originalStartTime" : "10/10/18 21:11:06",
+  "originalDuration" : 105000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 17419050074,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 1,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 2,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 71000,
+  "activeDuration" : 67000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/17419050074?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "10/12/18 01:20:54",
+  "startTime" : "10/11/18 03:05:11",
+  "originalStartTime" : "10/11/18 03:05:11",
+  "originalDuration" : 71000,
+  "elevationGain" : 2.998688,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 18498580730,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 1,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 77000,
+  "activeDuration" : 62000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/18498580730?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 19:03:23",
+  "originalStartTime" : "11/10/18 19:03:23",
+  "originalDuration" : 77000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 18498580724,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 61000,
+  "activeDuration" : 57000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/18498580724?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 19:05:10",
+  "originalStartTime" : "11/10/18 19:05:10",
+  "originalDuration" : 61000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 18498580723,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 1,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 66000,
+  "activeDuration" : 64000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/18498580723?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 19:07:01",
+  "originalStartTime" : "11/10/18 19:07:01",
+  "originalDuration" : 66000,
+  "elevationGain" : 0.0,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 18498580728,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 32000,
+  "activeDuration" : 31000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/18498580728?export=tcx",
+  "speed" : 0.0,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 20:26:06",
+  "originalStartTime" : "11/10/18 20:26:06",
+  "originalDuration" : 32000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 18498580725,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 13000,
+  "activeDuration" : 12000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 21:19:45",
+  "originalStartTime" : "11/10/18 21:19:45",
+  "originalDuration" : 13000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 18498580726,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.013167,
+  "distanceUnit" : "Mile",
+  "duration" : 29000,
+  "activeDuration" : 27000,
+  "steps" : 26,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 1.7556,
+  "pace" : 2050.580997949419,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 21:20:42",
+  "originalStartTime" : "11/10/18 21:20:42",
+  "originalDuration" : 29000,
+  "elevationGain" : 0.0,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+},{
+  "logId" : 18498580729,
+  "activityName" : "Run",
+  "activityTypeId" : 90009,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.022244,
+  "distanceUnit" : "Mile",
+  "duration" : 46000,
+  "activeDuration" : 45000,
+  "steps" : 58,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "tcxLink" : "https://www.fitbit.com/activities/exercise/18498580729?export=tcx",
+  "speed" : 1.77952,
+  "pace" : 2023.017442905952,
+  "lastModified" : "12/05/18 23:42:45",
+  "startTime" : "11/10/18 21:22:11",
+  "originalStartTime" : "11/10/18 21:22:11",
+  "originalDuration" : 46000,
+  "hasGps" : true,
+  "shouldFetchDetails" : true
+},{
+  "logId" : 19018777414,
+  "activityName" : "Hike",
+  "activityTypeId" : 90012,
+  "activityLevel" : [{
+    "minutes" : 0,
+    "name" : "sedentary"
+  },{
+    "minutes" : 0,
+    "name" : "lightly"
+  },{
+    "minutes" : 0,
+    "name" : "fairly"
+  },{
+    "minutes" : 0,
+    "name" : "very"
+  }],
+  "calories" : 0,
+  "distance" : 0.0,
+  "distanceUnit" : "Mile",
+  "duration" : 30000,
+  "activeDuration" : 25000,
+  "steps" : 0,
+  "source" : {
+    "type" : "tracker",
+    "name" : "Surge",
+    "id" : "71269384",
+    "url" : "https://www.fitbit.com/"
+  },
+  "logType" : "tracker",
+  "manualValuesSpecified" : {
+    "calories" : false,
+    "distance" : false,
+    "steps" : false
+  },
+  "speed" : 0.0,
+  "lastModified" : "01/05/19 02:55:30",
+  "startTime" : "12/19/18 04:09:06",
+  "originalStartTime" : "12/19/18 04:09:06",
+  "originalDuration" : 30000,
+  "hasGps" : false,
+  "shouldFetchDetails" : false
+}]

@@ -1,0 +1,90 @@
+{
+    "QMainWindow":[
+        {
+            "title":"Eye.Witness",
+            "icon":":/icons/icons/pie-chart.svg",
+            "frameless":true,
+            "transluscentBg":true,
+            "sizeGrip":"size_grip",
+            "shadow":[
+                {
+                    "color":"#000",
+                    "blurRadius":20,
+                    "xOffset": 0,
+                    "yOffset":0,
+                    "centralWidget":"centralwidget"
+                }
+            ],
+            "navigation":[
+                {
+                    "minimize":"minimize_window_button",
+                    "close":"close_window_button",
+                    "restore":[
+                        {
+                            "buttonName": "restore_window_button",
+                            "normalIcon":":/icons/icons/maximize-2.svg",
+                            "maximizedIcon":":/icons/icons/minimize-2.svg"
+                        }
+                    ],
+                    "moveWindow":"header_frame",
+                    "titleBar": "header_frame"
+                }
+            ]
+        }
+
+    ],
+    "QStackedWidget":[
+        {
+            "name":"stackedwidget",
+            "transitionAnimation":[
+                {
+                    "slide":[
+                        {
+                            "active":true,
+                            "duration":1000,
+                            "direction":"horizontal",
+                            "easingCurve":"OutBack"
+                        }
+                    ]
+                }
+            ],
+            "navigation":[{
+                "navigationButtons":[
+                    {
+                        "percentage_bar btn": "percentage bar_chart",
+                        "nested_donut_btn": "nested_donut",
+                        "line_chart_btn":"line_charts",
+                        "bar_charts_btn":"bar_charts",
+                        "temperature_bar_btn":"temperature_bar_chart"
+                    }
+                ]
+            }]
+        }
+    ],
+    "QCustomSlideMenu":[{
+        "name":"left_menu_widget",
+        "defaultSize": [{
+            "width":0,
+            "height":"parent"
+        }],
+        "collapsedSize": [{
+            "width":0,
+            "height":"parent"
+        }],
+        "expandedSize": [{
+            "width":250,
+            "height":"parent"
+        }],
+        "toggleButton":[{
+            "buttonName": "open_close_side_bar_btn",
+            "icon": [{
+                "whenMenuIsCollapsed": ":/icons/icons/align-center.svg",
+                "whenMenuIsExpanded": ":/icons/icons/align-center.svg"
+            }]
+        }],
+        "menuTransitionAnimation":[{
+            "animationDuration": 500,
+            "animationEasingCurve":"Linear"
+        }]
+    }]
+}
