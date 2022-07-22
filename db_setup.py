@@ -73,8 +73,8 @@ def Main(args):
   id = str(cursor.fetchone()[0])
 
   updateXLSfiles(xlsfiles,cursor, db,case_name,id)
-  updateTCXfiles(tcxfiles,cursor, db,case_name,id)
-  updateJSONfiles(jsonfiles, cursor, db, case_name, id)
+  #updateTCXfiles(tcxfiles,cursor, db,case_name,id)
+  #updateJSONfiles(jsonfiles, cursor, db, case_name, id)
 
   return 
  

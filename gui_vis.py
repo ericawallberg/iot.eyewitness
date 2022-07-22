@@ -28,6 +28,7 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 from timeline import Bar, ButtonInfo
 import enum
 from datetime import timedelta
+from branca.element import Figure
 ########################################################################
 # IMPORT GUI FILE
 from ui_interface import *
@@ -649,12 +650,14 @@ class MainWindow(QMainWindow):
         
 
 
-    def printMap(self, lat,lon):
+    def printMap(self, lat,lon, w='100%',h='100%'):
         coordinate = (lat, lon)
         m = folium.Map(
         	tiles='Stamen Terrain',
         	zoom_start=13,
-        	location=coordinate
+        	location=coordinate,
+            width=w,
+            height = h
         )
 
         folium.Marker(
@@ -1391,7 +1394,8 @@ class MainWindow(QMainWindow):
             
         else:
             self.dateTimeEdit_2.setDate(self.dateedit.date())
-            
+        
+        self.pushButton.animateClick()      
         self.daily_overview_tab(tables) 
         self.timeline_tab()
 
@@ -1505,6 +1509,9 @@ class MainWindow(QMainWindow):
 
         self.series = QtCharts.QPieSeries()
 
+        """ self.series.append('Awake', float(self.sleep[0][0][3]))
+        self.series.append('Asleep', float(self.sleep[0][0][3])) """
+
         self.series.append('Awake', 1)
         self.series.append('Asleep', 2)
 
@@ -1534,6 +1541,7 @@ class MainWindow(QMainWindow):
         self.lblTime = QLabel(self.groupBox_3)
         self.lblTime.setFont(self.font)
         self.lblTime.setStyleSheet("color: black;")
+        self.lblTime.setText(self.sleep[0][0][4])
         self.lblTime.setGeometry(QRect(self.lbl_14.x()+self.lbl_14.width()+110, self.lbl_14.y(), 54, 16))
         
         self.lbl_15 = QLabel(self.groupBox_3)
@@ -1545,6 +1553,7 @@ class MainWindow(QMainWindow):
         self.lblNumberOfAwakenings = QLabel(self.groupBox_3)
         self.lblNumberOfAwakenings.setFont(self.font)
         self.lblNumberOfAwakenings.setStyleSheet("color: black;")
+        self.lblNumberOfAwakenings.setText(self.sleep[0][0][4])
         self.lblNumberOfAwakenings.setGeometry(QRect(self.lbl_15.x()+self.lbl_15.width()+110, self.lbl_15.y(), 54, 16))
         
         self.lbl_16 = QLabel(self.groupBox_3)
@@ -1556,6 +1565,7 @@ class MainWindow(QMainWindow):
         self.lblTimeinBed = QLabel(self.groupBox_3)
         self.lblTimeinBed.setFont(self.font)
         self.lblTimeinBed.setStyleSheet("color: black;")
+        self.lblTimeinBed.setText(self.sleep[0][0][7])
         self.lblTimeinBed.setGeometry(QRect(self.lbl_16.x()+self.lbl_16.width()+110, self.lbl_16.y(), 54, 16))
         
 
@@ -1576,12 +1586,31 @@ class MainWindow(QMainWindow):
                 self.activities[0][0]+=("No record",)
         print(self.activities)
 
-        self.lblCaloriesBurned.setText(self.activities[0][0][4])
-        self.lblSteps.setText(self.activities[0][0][4])
-        self.lblDistance.setText(self.activities[0][0][4])
+        self.lblCaloriesBurned.setText(self.activities[0][0][1])
+        self.lblSteps.setText(self.activities[0][0][2])
+        self.lblDistance.setText(self.activities[0][0][3])
         self.lblFloors.setText(self.activities[0][0][4])
 
-        self.sleep_pie_chart()
+
+        print(self.body)
+        if self.body[0][0] == ("No record",):
+            for i in range(4):
+                self.body[0][0]+=("No record",)
+        print(self.body)
+
+        self.lblWeight.setText(self.body[0][0][1])
+        self.lblBMI.setText(self.body[0][0][3])
+        self.lblFat.setText(self.body[0][0][2])
+
+        print("sleep",self.sleep)
+        if self.sleep[0][0] == ("No record",):
+            for i in range(9):
+                self.sleep[0][0]+=("No record",)
+        print("sleep",self.sleep)
+
+
+        if self.sleep[0][0] != ("No record",):
+            self.sleep_pie_chart()
 
     def timeline_tab(self):
         for i in self.sleep:
@@ -1652,36 +1681,176 @@ class MainWindow(QMainWindow):
         print(self.currentTime.query, self.currentTime.time)
 
         self.deleteLayout(self.frame_13.layout())
-        self.lblright_state = QLabel()
-        self.lblright_state.setGeometry(QRect(30, 5, 59, 16))
-        self.lblright_state.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.frame_13.layout().addWidget(self.lblright_state)
         
-        if self.currentButton == 0:
+        
+        if self.currentButton == 0:     #What
+            self.lblright_state = QLabel()
+            self.lblright_state.setGeometry(QRect(30, 5, 59, 16))
+            self.lblright_state.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+            self.frame_13.layout().addWidget(self.lblright_state)
             if button.type == ArtifactType.sleepStart:
-                self.lblright_state.setText("Sleep session started. \n\nStarted at "+button.query[0]+", ended at " + button.query[1]+". \n\nDuration of: " + str(timedelta(microseconds=int(button.query[5])))+" hours.")
+                self.lblright_state.setText("Sleep session started. ")
             elif button.type == ArtifactType.sleepFinish:
-                self.lblright_state.setText("Sleep session finished. \n\nStarted at "+button.query[0]+", ended at " + button.query[1]+". \n\nDuration of: " + str(timedelta(microseconds=int(button.query[5])))+" hours.")
+                self.lblright_state.setText("Sleep session finished.")
             elif button.type == ArtifactType.exercise:
-                self.lblright_state.setText("New activity started. \n\nType: "+button.query[1]+". \n\nStarted at "+button.time.toString("hh:mm")+", ended at "+ button.time.addMSecs(int(button.query[3])).toString("hh:mm")+". \n\nDuration of: " + str(timedelta(milliseconds=int(button.query[3])))+".")
+                self.lblright_state.setText("New activity started. \n\nType: "+button.query[1]+".")
             elif button.type == ArtifactType.gps:
-                self.lblright_state.setText("New GPS record.  "+button.time.toString("hh:mm"))
+                self.lblright_state.setText("New GPS record. ")
             else:
                 self.lblright_state.setText("New ¨"+button.type.name+"¨ measurement.")
             #self.pushButton.animateClick()
-        elif self.currentButton == 1:
+        elif self.currentButton == 1:   #Where
             if button.type == ArtifactType.gps:
-                self.verticalLayout_15.addWidget(self.printMap(button.query[13],button.query[14]))
+                """ fig = Figure(width=200, height=400)
+                m = folium.Map(location=[button.query[13],button.query[14]], zoom_start=13)
+                fig.add_child(m) """
+                overview_map = self.printMap(button.query[13],button.query[14],'75%')
+                overview_map.setGeometry(QRect(30, 5, 59, 16))
+                self.frame_13.layout().addWidget(overview_map)
+                QApplication.processEvents()
             else:
                 self.lblright_state.setText("No location record")
             #self.pushButton_2.animateClick()
-        elif self.currentButton == 2:
-            self.lblright_state.setText("Same old ")
-            #self.pushButton_3.animateClick()
-        elif self.currentButton == 3:
-            self.lblright_state.setText("No location record")
+        elif self.currentButton == 2:     #Who
+            self.groupBox = QGroupBox()
+            self.groupBox.setTitle("User Profile")
+            self.groupBox.setObjectName(u"groupBox")
+            self.groupBox.setStyleSheet("QGroupBox#groupBox{ border: 1px solid black;}")
+            self.groupBox.setGeometry(QRect(0, 0, 200, 400))
+            self.frame_13.layout().addWidget(self.groupBox)
+        
+            self.label_3 = QLabel(self.groupBox)
+            self.label_3.setFont(self.font1)
+            self.label_3.setStyleSheet("color: black;")
+            self.label_3.setText("Full Name:")
+            self.label_3.setGeometry(QRect(30, 40, 59, 16))
+
+
+            self.lblFullname = QLabel(self.groupBox)
+            self.lblFullname.setFont(self.font)
+            self.lblFullname.setStyleSheet("color: black;")
+            self.lblFullname.setText(self.user[0][0][4])
+            self.lblFullname.setGeometry(QRect(self.label_3.x()+100, self.label_3.y(), 59, 16))
+
+            self.label_4 = QLabel(self.groupBox)
+            self.label_4.setFont(self.font1)
+            self.label_4.setStyleSheet("color: black;")
+            self.label_4.setText("Date of Birth:")
+            self.label_4.setGeometry(QRect(30, 70, 100, 16))
+
+            self.lblDOB = QLabel(self.groupBox)
+            self.lblDOB.setFont(self.font)
+            self.lblDOB.setStyleSheet("color: black;")
+            self.lblDOB.setText(self.user[0][0][1])
+            self.lblDOB.setGeometry(QRect(self.label_4.x()+100, self.label_4.y(), 100, 16))
+
+
+            self.label_5 = QLabel(self.groupBox)
+            self.label_5.setFont(self.font1)
+            self.label_5.setStyleSheet("color: black;")
+            self.label_5.setText("Gender:")
+            self.label_5.setGeometry(QRect(30, 100, 54, 16))
+
+            self.lblGender = QLabel(self.groupBox)
+            self.lblGender.setFont(self.font)
+            self.lblGender.setStyleSheet("color: black;")
+            self.lblGender.setText(self.user[0][0][0])
+            self.lblGender.setGeometry(QRect(self.label_5.x()+100, self.label_5.y(), 54, 16))
+            
+
+            self.label_6 = QLabel(self.groupBox)
+            self.label_6.setFont(self.font1)
+            self.label_6.setStyleSheet("color: black;")
+            self.label_6.setText("Age:")
+            self.label_6.setGeometry(QRect(30, 130, 54, 16))
+
+            self.lblAge = QLabel(self.groupBox)
+            self.lblAge.setFont(self.font)
+            self.lblAge.setStyleSheet("color: black;")
+            self.lblAge.setText(self.user[0][0][6])
+            self.lblAge.setGeometry(QRect(self.label_6.x()+100, self.label_6.y(), 54, 16))
+            
+
+            self.label_7 = QLabel(self.groupBox)
+            self.label_7.setFont(self.font1)
+            self.label_7.setStyleSheet("color: black;")
+            self.label_7.setText("Height:")
+            self.label_7.setGeometry(QRect(30, 160, 54, 16))
+
+            self.lblHeight = QLabel(self.groupBox)
+            self.lblHeight.setFont(self.font)
+            self.lblHeight.setStyleSheet("color: black;")
+            
+            self.lblHeight.setText('{:.2f}'.format(round(float(self.user[0][0][2])/12,2))+" ft")
+            self.lblHeight.setGeometry(QRect(self.label_7.x()+100, self.label_7.y(), 54, 16))
+            
+
+            self.label_8 = QLabel(self.groupBox)
+            self.label_8.setFont(self.font1)
+            self.label_8.setStyleSheet("color: black;")
+            self.label_8.setText("Weight:")
+            self.label_8.setGeometry(QRect(30,190, 54, 16))
+
+            self.lblWeight = QLabel(self.groupBox)
+            self.lblWeight.setFont(self.font)
+            self.lblWeight.setStyleSheet("color: black;")
+            self.lblWeight.setText('{:.2f}'.format(float(self.user[0][0][3]))+" lbs")
+            self.lblWeight.setGeometry(QRect(self.label_8.x()+100, self.label_8.y(), 54, 16))
+            
+            self.label_9 = QLabel(self.groupBox)
+            self.label_9.setFont(self.font1)
+            self.label_9.setStyleSheet("color: black;")
+            self.label_9.setText("Timezone:")
+            self.label_9.setGeometry(QRect(30, 220, 60, 16))
+
+            self.lblTimezone = QLabel(self.groupBox)
+            self.lblTimezone.setFont(self.font)
+            self.lblTimezone.setStyleSheet("color: black;")
+            self.lblTimezone.setText(self.user[0][0][5])
+            self.lblTimezone.setGeometry(QRect(self.label_9.x()+100, self.label_9.y(), 150, 16))
+
+            self.label_10 = QLabel(self.groupBox)
+            self.label_10.setFont(self.font1)
+            self.label_10.setStyleSheet("color: black;")
+            self.label_10.setText("Average Daily Steps:")
+            self.label_10.setGeometry(QRect(30, 250,750, 16))
+
+            self.lblADS = QLabel(self.groupBox)
+            self.lblADS.setFont(self.font)
+            self.lblADS.setStyleSheet("color: black;")
+            self.lblADS.setText(self.user[0][0][7])
+            self.lblADS.setGeometry(QRect(self.label_10.x()+150, self.label_10.y(), 54, 16))
+
+            self.labelphoto = QLabel(self.groupBox)
+            self.labelphoto.setGeometry(QRect(230, 23, 240, 240))
+            pixmap = QPixmap('test\Avatar-Photo.png')
+            self.labelphoto.setPixmap(pixmap)
+            self.labelphoto.setScaledContents(1)
+            sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+            sizePolicy3.setHorizontalStretch(0)
+            sizePolicy3.setVerticalStretch(0)
+            sizePolicy3.setHeightForWidth(self.labelphoto.sizePolicy().hasHeightForWidth())
+            self.labelphoto.setSizePolicy(sizePolicy3)
+        elif self.currentButton == 3:    #When
+            self.lblright_state = QLabel()
+            self.lblright_state.setGeometry(QRect(30, 5, 59, 16))
+            self.lblright_state.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+            self.frame_13.layout().addWidget(self.lblright_state)
+            if button.type == ArtifactType.sleepStart:
+                self.lblright_state.setText("Started at "+button.query[0]+", ended at " + button.query[1]+". \n\nDuration of: " + str(timedelta(microseconds=int(button.query[5])))+" hours.")
+            elif button.type == ArtifactType.sleepFinish:
+                self.lblright_state.setText("Started at "+button.query[0]+", ended at " + button.query[1]+". \n\nDuration of: " + str(timedelta(microseconds=int(button.query[5])))+" hours.")
+            elif button.type == ArtifactType.exercise:
+                self.lblright_state.setText("Started at "+button.time.toString("hh:mm")+", ended at "+ button.time.addMSecs(int(button.query[3])).toString("hh:mm")+". \n\nDuration of: " + str(timedelta(milliseconds=int(button.query[3])))+".")
+            elif button.type == ArtifactType.gps:
+                self.lblright_state.setText("Started at "+button.time.toString("hh:mm")+", ended at "+ button.k[17].split('T')[1][:5]+".")
+                #QTime.fromString(k[17].split('T')[1][:5],"hh:mm")
             #self.pushButton_4.animateClick()
-        elif self.currentButton == 4:
+        elif self.currentButton == 4:    #More Details
+            self.lblright_state = QLabel()
+            self.lblright_state.setGeometry(QRect(30, 5, 59, 16))
+            self.lblright_state.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+            self.frame_13.layout().addWidget(self.lblright_state)
             self.lblright_state.setText("New ¨"+button.type+"¨ measurement.")
             #self.pushButton_5.animateClick()
 
@@ -1726,9 +1895,6 @@ class MainWindow(QMainWindow):
             self.series.append(QPointF(float(row[0][-2:]),row[1]))
             print(row[0][-2:], row[1]) """
 
-
-    
-        
     def show_map(self):
         coordinate = (37.8199286, -122.4782551)
         m = folium.Map(
@@ -1747,12 +1913,6 @@ class MainWindow(QMainWindow):
     def create_line_chart(self, column, table):
       #  self.model = Qmode
         select_query = "SELECT `Date`, `%s` FROM `%s`" % (column,table)
-        """ select_query = "SELECT "
-        for index, value in column:
-            select_query += " `%s` " % (value)
-            if index != len(column):
-                select_query += ","
-        select_query += " FROM `%s`" % (table) """
             
         #print(select_query)
             
@@ -1777,12 +1937,6 @@ class MainWindow(QMainWindow):
        
         self.chart.addSeries(self.series)
         self.chart.setTitle(column)
-
-        """ categories = ["Week 1", "Week 2", "Week 3", "Week 4"]
-        self.axisX = QtCharts.QCategoryAxis()
-        self.axisX.append(categories)
-        self.chart.setAxisX(self.axisX, self.series)
-        self.axisX.setRange("Week 1", "Week 4") """
         self.chart.createDefaultAxes()
 
         self.axisY = QtCharts.QValueAxis()
@@ -1821,9 +1975,7 @@ class MainWindow(QMainWindow):
         self.chartView.setSizePolicy(sizePolicy)
         self.chartView.setMinimumSize(QSize(0, 300))
         return self.chartView
-        """ self.ui.line_charts_cont.addWidget(self.chartView, 0, 0, 9, 9)
-        self.ui.frame_16.setStyleSheet(u"background-color: transparent")
-        """
+
     def create_bar_graph(self):
         select_query = "SELECT `Date`, `Steps` FROM activities"
         self.cursor.execute(select_query)
@@ -1839,17 +1991,6 @@ class MainWindow(QMainWindow):
         self.chart.addSeries(self.lineSeries)
         self.chart.setTitle("Steps")
 
-        """ self.categories = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-        self.axisX = QtCharts.QBarCategoryAxis()
-        self.axisX.append(self.categories)
-        self.chart.setAxisX(self.axisX, self.lineSeries)
-        self.chart.setAxisX(self.axisX, self.barSeries)
-        self.axisX.setRange("Jan", "Jun")
-
-        self.axisY = QtCharts.QValueAxis()
-        self.chart.setAxisY(self.axisY, self.lineSeries)
-        self.chart.setAxisY(self.axisY, self.barSeries)
-        self.axisY.setRange(0, max(cal_values)) """
 
         self.chart.createDefaultAxes()
         self.axisY = QtCharts.QValueAxis()
