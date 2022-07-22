@@ -4,34 +4,24 @@
 ##  SCRIPT TO VISUALIZE THE DATA                                              ##
 ## "Usage: python gui_vis.py"                                                 ##
 ################################################################################
-from multiprocessing import connection
 import sys
-from tkinter import N
-from PySide2 import *
 import folium
-from sqlalchemy import column, create_engine, null
-from PyQt5.QtSql import QSqlDatabase
 from PySide2 import QtWidgets
 from PySide2 import QtCore
 from PySide2 import QtGui
 from PySide2.QtGui import QPainter
 from PySide2.QtWidgets import (QMainWindow, QApplication) 
 from PySide2.QtCharts import QtCharts as QtCharts
-#import MySQLdb as mdb
 import mysql.connector
 from mysql.connector import Error
-from random import randrange
 from functools import partial
-from utils import *
 from collapsiblebox import CollapsibleBox
-from PyQt5 import sip
 from collections import defaultdict
 import io
 from PySide2.QtWebEngineWidgets import QWebEngineView
 from timeline import Bar, ButtonInfo
 import enum
 from datetime import timedelta
-from branca.element import Figure
 from ui_interface import *
 
 
