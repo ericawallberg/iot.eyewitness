@@ -1,6 +1,9 @@
-########################################################################
-## IMPORTS
-########################################################################
+################################################################################
+##                            IoT.EYEWITNESS                                  ##
+##                             gui_vis.py                                     ##   
+##  SCRIPT TO VISUALIZE THE DATA                                              ##
+## "Usage: python gui_vis.py"                                                 ##
+################################################################################
 from multiprocessing import connection
 import sys
 from tkinter import N
@@ -29,20 +32,9 @@ from timeline import Bar, ButtonInfo
 import enum
 from datetime import timedelta
 from branca.element import Figure
-########################################################################
-# IMPORT GUI FILE
 from ui_interface import *
-########################################################################
 
-#from Custom_Widgets.Widgets import *
 
-########################################################################
-# IMPORT CUSTOM WIDGETS
-#from Custom_Widgets.Widgets import *
-
-########################################################################
-## A LIST OF UI WIDGETS TO APPLY SHADOW
-########################################################################
 shadow_elements = { 
     "left_menu_frame",
     "frame_3",
@@ -62,9 +54,6 @@ class ArtifactType(enum.Enum):
     body =7
 
 
-########################################################################
-## MAIN WINDOW CLASS
-########################################################################
 class MainWindow(QMainWindow):
 
 
@@ -73,85 +62,41 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
 
         self.ui.setupUi(self)
-
-        #######################################################################
-        ## # Remove window tittle bar
-        ########################################################################    
+ 
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint) 
 
-        #######################################################################
-        ## # Set main background to transparent
-        ########################################################################  
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
       
-        #######################################################################
-        ## # Shadow effect style
-        ########################################################################  
         self.shadow = QGraphicsDropShadowEffect(self)
         self.shadow.setBlurRadius(20)
         self.shadow.setXOffset(0)
         self.shadow.setYOffset(0)
         
-        #######################################################################
-        ## # Appy shadow to central widget
-        ########################################################################  
         self.ui.centralwidget.setGraphicsEffect(self.shadow)   
 
-        #######################################################################
-        # Set window Icon
-        # This icon and title will not appear on our app main window because we removed the title bar
-        #######################################################################
         self.setWindowIcon(QtGui.QIcon(":/icons/icons/pie-chart.svg"))
-        # Set window tittle
         self.setWindowTitle("Eye.Witness")
 
-        #################################################################################
-        # Window Size grip to resize window
-        #################################################################################
         QSizeGrip(self.ui.size_grip)
 
-        #######################################################################
-        #Minimize window
         self.ui.minimize_window_button.clicked.connect(lambda: self.showMinimized())
-        #######################################################################
-        #Close window
         self.ui.close_window_button.clicked.connect(lambda: self.close())
-        #######################################################################
-        #Restore/Maximize window
         self.ui.restore_window_button.clicked.connect(lambda: self.restore_or_maximize_window())
-        #######################################################################
-
-        #######################################################################
-        #Left Menu toggle button (Show hide menu labels)
+        
         self.ui.open_close_side_bar_btn.clicked.connect(lambda: self.slideLeftMenu())
 
 
-        # ###############################################
-        # Function to Move window on mouse drag event on the tittle bar
-        # ###############################################
         def moveWindow(e):
-            # Detect if the window is  normal size
-            # ###############################################  
             if self.isMaximized() == False: #Not maximized
-                # Move window only when window is normal size  
-                # ###############################################
-                #if left mouse button is clicked (Only accept left mouse button clicks)
                 if e.buttons() == Qt.LeftButton:  
                     #Move window 
                     self.move(self.pos() + e.globalPos() - self.clickPosition)
                     self.clickPosition = e.globalPos()
                     e.accept()
-        #######################################################################
-      
-        #######################################################################
-        # Add click event/Mouse move event/drag event to the top header to move the window
-        #######################################################################
-        self.ui.header_frame.mouseMoveEvent = moveWindow
-        #######################################################################
 
-        #######################################################################
-        # SHOW WINDOW
-        #######################################################################
+
+        self.ui.header_frame.mouseMoveEvent = moveWindow
+        
         self.show()
 
 
@@ -163,13 +108,7 @@ class MainWindow(QMainWindow):
         self.font1.setBold(True)
         self.font1.setPointSize(50)
 
-        #######################################################################
-        # Apply shadow to widgets on shadow_elements list
-        #######################################################################
         for x in shadow_elements:
-                #######################################################################
-                ## # Shadow effect style
-                ######################################################################## 
                 effect = QtWidgets.QGraphicsDropShadowEffect(self)
                 effect.setBlurRadius(18)
                 effect.setXOffset(0)
@@ -179,7 +118,6 @@ class MainWindow(QMainWindow):
 
 
         #create the DB connection
-        #self.connection = self.createConnection()
         try:
             self.connection = mysql.connector.connect(
                 host="localhost",
@@ -194,18 +132,13 @@ class MainWindow(QMainWindow):
                 self.cursor.execute("select database();")
                 record = self.cursor.fetchone()
                 print("You're connected to database: ", record)
-               # QMessageBox.about(self, 'Connection', 'Successfully Connected to DB')
         except Error as e:
             print("Error while connecting to MySQL", e)
-            #QMessageBox.about(self, 'Connection', 'Not Successfully Connected to DB')
 
 
         self.create_left_menu()
 
 
-    #######################################################################
-    # Update restore button icon on msximizing or minimizing window
-    #######################################################################
     def restore_or_maximize_window(self):
         # If window is maxmized
         if self.isMaximized():
@@ -217,9 +150,7 @@ class MainWindow(QMainWindow):
             # Change Icon
             self.ui.restore_window_button.setIcon(QtGui.QIcon(u":/icons/icons/minimize-2.svg"))
 
-     ########################################################################
-    # Slide left menu function
-    ########################################################################
+
     def slideLeftMenu(self):
         # Get current left menu width
         width = self.ui.left_menu_frame.width()
@@ -242,19 +173,13 @@ class MainWindow(QMainWindow):
         self.animation.setEndValue(newWidth)#end value is the new menu width
         self.animation.setEasingCurve(QtCore.QEasingCurve.OutBounce)
         self.animation.start()
-    #######################################################################
 
 
-    #######################################################################
-    # Add mouse events to the window
-    #######################################################################
+
     def mousePressEvent(self, event):
-        # ###############################################
         # Get the current position of the mouse
         self.clickPosition = event.globalPos()
         # We will use this value to move the window
-    #######################################################################
-    #######################################################################
 
 
     def create_left_menu(self):
@@ -294,18 +219,19 @@ class MainWindow(QMainWindow):
             result2 = self.cursor.fetchall()
             result2.append("Overview")
 
+
             for j in result2:
-                
-                if j != "Overview": 
-                    label = QPushButton(j[0][2:])
-                    label.clicked.connect(partial(self.assign_handle, j[0][j[0].rfind('_')+1:],j[0], result2))
-                else: 
-                    label = QPushButton(j)
-                    label.setStyleSheet("background-color : darkred")
-                    label.clicked.connect(partial(self.assign_handle, j,j,result2))
-                
-                
-                lay.addWidget(label)
+                if not j[0].endswith('exercise_profile') and not j[0].endswith('heart_rate_profile') and  not j[0].endswith('weight_profile'):
+                    if j != "Overview": 
+                        label = QPushButton(j[0][2:])
+                        label.clicked.connect(partial(self.assign_handle, j[0][j[0].rfind('_')+1:],j[0], result2))
+                    else: 
+                        label = QPushButton(j)
+                        label.setStyleSheet("background-color : darkred")
+                        label.clicked.connect(partial(self.assign_handle, j,j,result2))
+                    
+                    
+                    lay.addWidget(label)
                 
             
             box.setContentLayout(lay)
@@ -2019,17 +1945,8 @@ class MainWindow(QMainWindow):
 
 
 
-########################################################################
-## EXECUTE APP
-########################################################################
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    ########################################################################
-    ## 
-    ########################################################################
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
-########################################################################
-## END===>
-########################################################################  
