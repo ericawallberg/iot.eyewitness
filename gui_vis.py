@@ -23,7 +23,7 @@ from timeline import Bar, ButtonInfo
 import enum
 from datetime import timedelta
 from ui_interface import *
-
+from utils import *
 
 shadow_elements = { 
     "left_menu_frame",
@@ -211,7 +211,7 @@ class MainWindow(QMainWindow):
 
 
             for j in result2:
-                if not j[0].endswith('exercise_profile') and not j[0].endswith('heart_rate_profile') and  not j[0].endswith('weight_profile'):
+                if not j[0].endswith('exercise_profile') and not j[0].endswith('heart_rate_profile') and  not j[0].endswith('weight_profile') and not j[0].endswith('sleep'):
                     if j != "Overview": 
                         label = QPushButton(j[0][2:])
                         label.clicked.connect(partial(self.assign_handle, j[0][j[0].rfind('_')+1:],j[0], result2))
@@ -968,7 +968,7 @@ class MainWindow(QMainWindow):
         self.lblCaloriesBurned = QLabel(self.groupBox_2)
         self.lblCaloriesBurned.setFont(self.font)
         self.lblCaloriesBurned.setStyleSheet("color: black;")
-        self.lblCaloriesBurned.setGeometry(QRect(self.label_11.x()+120, self.label_11.y(), 59, 16))
+        self.lblCaloriesBurned.setGeometry(QRect(self.label_11.x()+110, self.label_11.y(),100, 16))
 
         self.label_12 = QLabel(self.groupBox_2)
         self.label_12.setFont(self.font1)
@@ -991,7 +991,7 @@ class MainWindow(QMainWindow):
         self.lblDistance = QLabel(self.groupBox_2)
         self.lblDistance.setFont(self.font)
         self.lblDistance.setStyleSheet("color: black;")
-        self.lblDistance.setGeometry(QRect(self.label_13.x()+110, self.label_13.y(), 54, 16))
+        self.lblDistance.setGeometry(QRect(self.label_13.x()+110, self.label_13.y(), 100, 16))
         
 
         self.label_14 = QLabel(self.groupBox_2)
@@ -1016,6 +1016,53 @@ class MainWindow(QMainWindow):
         self.groupBox_3.setStyleSheet("QGroupBox{ border: 1px solid black;}")
         #self.groupBox_3.setGeometry(QRect(20, 550,  700, 181))
 
+        self._chart_view = QtCharts.QChartView(self.groupBox_3)
+        self._chart_view.setRenderHint(QPainter.Antialiasing)
+        self._chart_view.setGeometry(QRect(35, 3, 300, 275))
+        self._chart_view.setVisible(False)
+
+        self.lbl_nopie = QLabel(self.groupBox_3)
+        self.lbl_nopie.setFont(self.font1)
+        self.lbl_nopie.setStyleSheet("color: black;")
+        self.lbl_nopie.setText("No recorded data for pie chart")
+        self.lbl_nopie.setGeometry(QRect(50, 100, 200, 16))
+        self.lbl_nopie.setVisible(False)
+
+        self.lbl_14 = QLabel(self.groupBox_3)
+        self.lbl_14.setFont(self.font1)
+        self.lbl_14.setStyleSheet("color: black;")
+        self.lbl_14.setText("Time:")
+        self.lbl_14.setGeometry(QRect(30, 250, 100, 16))
+
+        self.lblTime = QLabel(self.groupBox_3)
+        self.lblTime.setFont(self.font)
+        self.lblTime.setStyleSheet("color: black;")
+        self.lblTime.setGeometry(QRect(self.lbl_14.x()+self.lbl_14.width()+110, self.lbl_14.y(), 100, 16))
+        
+        self.lbl_15 = QLabel(self.groupBox_3)
+        self.lbl_15.setFont(self.font1)
+        self.lbl_15.setStyleSheet("color: black;")
+        self.lbl_15.setText("Number of Awakenings:")
+        self.lbl_15.setGeometry(QRect(30, 280, 150, 16))
+
+        self.lblNumberOfAwakenings = QLabel(self.groupBox_3)
+        self.lblNumberOfAwakenings.setFont(self.font)
+        self.lblNumberOfAwakenings.setStyleSheet("color: black;")
+        self.lblNumberOfAwakenings.setGeometry(QRect(self.lbl_15.x()+self.lbl_15.width()+60, self.lbl_15.y(), 54, 16))
+        
+        self.lbl_16 = QLabel(self.groupBox_3)
+        self.lbl_16.setFont(self.font1)
+        self.lbl_16.setStyleSheet("color: black;")
+        self.lbl_16.setText("Time in Bed:")
+        self.lbl_16.setGeometry(QRect(30, 310, 100, 16))
+
+        self.lblTimeinBed = QLabel(self.groupBox_3)
+        self.lblTimeinBed.setFont(self.font)
+        self.lblTimeinBed.setStyleSheet("color: black;")
+        self.lblTimeinBed.setGeometry(QRect(self.lbl_16.x()+self.lbl_16.width()+110, self.lbl_16.y(), 100, 16))
+
+        
+
         self.gridLayout_2.addWidget(self.groupBox_3,1, 1, 2, 1)
 
         self.groupBox_4 = QGroupBox(self.frame_2)
@@ -1033,12 +1080,12 @@ class MainWindow(QMainWindow):
         self.lblWeight= QLabel(self.groupBox_4)
         self.lblWeight.setFont(self.font)
         self.lblWeight.setStyleSheet("color: black;")
-        self.lblWeight.setGeometry(QRect(self.label_15.x()+120, self.label_15.y(), 59, 16))
+        self.lblWeight.setGeometry(QRect(self.label_15.x()+110, self.label_15.y(), 100, 16))
 
         self.label_16 = QLabel(self.groupBox_4)
         self.label_16.setFont(self.font1)
         self.label_16.setStyleSheet("color: black;")
-        self.label_16.setText("Steps:")
+        self.label_16.setText("BMI:")
         self.label_16.setGeometry(QRect(30, 70, 100, 16))
 
         self.lblBMI = QLabel(self.groupBox_4)
@@ -1050,7 +1097,7 @@ class MainWindow(QMainWindow):
         self.label_17 = QLabel(self.groupBox_4)
         self.label_17.setFont(self.font1)
         self.label_17.setStyleSheet("color: black;")
-        self.label_17.setText("Distance:")
+        self.label_17.setText("Fat:")
         self.label_17.setGeometry(QRect(30, 100, 54, 16))
 
         self.lblFat = QLabel(self.groupBox_4)
@@ -1380,7 +1427,7 @@ class MainWindow(QMainWindow):
                     self.gps.append([("No record",)])
                 print(self.gps)
             elif(table[0].endswith("activities")):
-                select_query = "SELECT * FROM `%s` WHERE Date = %s;" % (table[0],self.dateedit.date().toString("yyyy-MM-dd"))
+                select_query = "SELECT * FROM `%s` WHERE Date = '%s'" % (table[0],self.dateedit.date().toString("yyyy-MM-dd"))
                 print(select_query)
                 self.cursor.execute(select_query)
                 result = self.cursor.fetchall()
@@ -1420,70 +1467,7 @@ class MainWindow(QMainWindow):
                     self.user.append(list([("No record",)]))
                 print(self.user)
 
-        
-    def sleep_pie_chart(self):
-
-        self.series = QtCharts.QPieSeries()
-
-        """ self.series.append('Awake', float(self.sleep[0][0][3]))
-        self.series.append('Asleep', float(self.sleep[0][0][3])) """
-
-        self.series.append('Awake', 1)
-        self.series.append('Asleep', 2)
-
-
-        self.series.setLabelsVisible()
-
-        self.series.setLabelsPosition(QtCharts.QPieSlice.LabelOutside)
-        self.series.slices()[0].setLabelColor(Qt.red)
-        self.series.slices()[1].setLabelColor(Qt.red)
-
-        self.chart = QtCharts.QChart()
-        self.chart.addSeries(self.series)
-        self.chart.setTitle('Sleep Minutes')
-        self.chart.setBackgroundBrush(QBrush(QColor("transparent")))
-        self.chart.legend().hide()
-
-        self._chart_view = QtCharts.QChartView(self.chart,self.groupBox_3)
-        self._chart_view.setRenderHint(QPainter.Antialiasing)
-        self._chart_view.setGeometry(QRect(35, 3, 300, 275))
-
-        self.lbl_14 = QLabel(self.groupBox_3)
-        self.lbl_14.setFont(self.font1)
-        self.lbl_14.setStyleSheet("color: black;")
-        self.lbl_14.setText("Time:")
-        self.lbl_14.setGeometry(QRect(30, 200, 100, 16))
-
-        self.lblTime = QLabel(self.groupBox_3)
-        self.lblTime.setFont(self.font)
-        self.lblTime.setStyleSheet("color: black;")
-        self.lblTime.setText(self.sleep[0][0][4])
-        self.lblTime.setGeometry(QRect(self.lbl_14.x()+self.lbl_14.width()+110, self.lbl_14.y(), 54, 16))
-        
-        self.lbl_15 = QLabel(self.groupBox_3)
-        self.lbl_15.setFont(self.font1)
-        self.lbl_15.setStyleSheet("color: black;")
-        self.lbl_15.setText("Number of Awakenings:")
-        self.lbl_15.setGeometry(QRect(30, 230, 150, 16))
-
-        self.lblNumberOfAwakenings = QLabel(self.groupBox_3)
-        self.lblNumberOfAwakenings.setFont(self.font)
-        self.lblNumberOfAwakenings.setStyleSheet("color: black;")
-        self.lblNumberOfAwakenings.setText(self.sleep[0][0][4])
-        self.lblNumberOfAwakenings.setGeometry(QRect(self.lbl_15.x()+self.lbl_15.width()+110, self.lbl_15.y(), 54, 16))
-        
-        self.lbl_16 = QLabel(self.groupBox_3)
-        self.lbl_16.setFont(self.font1)
-        self.lbl_16.setStyleSheet("color: black;")
-        self.lbl_16.setText("Time in Bed:")
-        self.lbl_16.setGeometry(QRect(30, 260, 100, 16))
-
-        self.lblTimeinBed = QLabel(self.groupBox_3)
-        self.lblTimeinBed.setFont(self.font)
-        self.lblTimeinBed.setStyleSheet("color: black;")
-        self.lblTimeinBed.setText(self.sleep[0][0][7])
-        self.lblTimeinBed.setGeometry(QRect(self.lbl_16.x()+self.lbl_16.width()+110, self.lbl_16.y(), 54, 16))
-        
+      
 
     def daily_overview_tab(self,tables):
         self.getDayInfo(tables)
@@ -1502,9 +1486,16 @@ class MainWindow(QMainWindow):
                 self.activities[0][0]+=("No record",)
         print(self.activities)
 
-        self.lblCaloriesBurned.setText(self.activities[0][0][1])
+        if self.activities[0][0][1] == "No record":
+            self.lblCaloriesBurned.setText(self.activities[0][0][1])
+        else:
+            self.lblCaloriesBurned.setText(self.activities[0][0][1]+" kcals")
         self.lblSteps.setText(self.activities[0][0][2])
-        self.lblDistance.setText(self.activities[0][0][3])
+
+        if self.activities[0][0][3]== "No record":
+            self.lblDistance.setText(self.activities[0][0][3])
+        else:
+            self.lblDistance.setText(self.activities[0][0][3]+" miles")
         self.lblFloors.setText(self.activities[0][0][4])
 
 
@@ -1514,19 +1505,68 @@ class MainWindow(QMainWindow):
                 self.body[0][0]+=("No record",)
         print(self.body)
 
-        self.lblWeight.setText(self.body[0][0][1])
+        if self.body[0][0][1]== "No record":
+            self.lblWeight.setText(self.body[0][0][1])
+        else:
+            self.lblWeight.setText(self.body[0][0][1]+" lbs")
+
         self.lblBMI.setText(self.body[0][0][3])
         self.lblFat.setText(self.body[0][0][2])
 
+        self.sleep_pie_chart()
+
+         
+    def sleep_pie_chart(self):
+
+        self.usable_list =()
+        
         print("sleep",self.sleep)
-        if self.sleep[0][0] == ("No record",):
-            for i in range(9):
-                self.sleep[0][0]+=("No record",)
-        print("sleep",self.sleep)
+        for i in self.sleep:
+            if i[0] != ("No record",):
+                self.usable_list = i[0]
+        if not self.usable_list:
+            for k in range(9):
+                self.usable_list+=("No record",)
+
+        print(self.usable_list)
+        if self.usable_list[3] != "No record":
+            self.lbl_nopie.setVisible(False)
+            self.series = QtCharts.QPieSeries()
+
+            self.series.append('Awake', float(self.usable_list[4]))
+            self.series.append('Asleep', float(self.usable_list[3]))
+
+            self.series.setLabelsVisible()
+
+            self.series.setLabelsPosition(QtCharts.QPieSlice.LabelOutside)
+            self.series.slices()[0].setLabelColor(Qt.red)
+            self.series.slices()[1].setLabelColor(Qt.red)
+            for slice in self.series.slices():
+                slice.setLabel("{:.2f}%".format(100 * slice.percentage()))
+
+            self.chart = QtCharts.QChart()
+            self.chart.addSeries(self.series)
+            self.chart.setTitle('Sleep Minutes')
+            self.chart.setBackgroundBrush(QBrush(QColor("transparent")))
 
 
-        if self.sleep[0][0] != ("No record",):
-            self.sleep_pie_chart()
+            self._chart_view.setChart(self.chart)
+            self._chart_view.setVisible(True)
+            
+        else: 
+            self._chart_view.setVisible(False)
+            self.lbl_nopie.setVisible(True)
+
+        lblTimeText = self.usable_list[0].split()[1]+" - "+self.usable_list[1].split()[1]
+        if self.usable_list[0] == "No record": 
+            lblTimeText=self.usable_list[0] 
+        self.lblTime.setText(lblTimeText)
+        self.lblNumberOfAwakenings.setText(self.usable_list[4])
+        if self.usable_list[5] == "No record": 
+            self.lblTimeinBed.setText(self.usable_list[5])
+        else:
+            self.lblTimeinBed.setText(self.usable_list[5]+" minutes")
+         
 
     def timeline_tab(self):
         for i in self.sleep:
@@ -1802,14 +1842,6 @@ class MainWindow(QMainWindow):
         print(start_time)
         print(end_time)
 
-        """ try:
-            values.append(float(row[1].replace(',','')))
-            self.series.append(QPointF(float(row[0][-2:]),float(row[1].replace(',',''))))
-            print(row[0][-2:], float(row[1].replace(',','')))
-        except:
-            values.append(row[1])
-            self.series.append(QPointF(float(row[0][-2:]),row[1]))
-            print(row[0][-2:], row[1]) """
 
     def show_map(self):
         coordinate = (37.8199286, -122.4782551)
