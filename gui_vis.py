@@ -12,6 +12,7 @@ from PySide2 import QtGui
 from PySide2.QtGui import QPainter
 from PySide2.QtWidgets import (QMainWindow, QApplication) 
 from PySide2.QtCharts import QtCharts as QtCharts
+from PySide2.QtMultimedia import QMediaPlayer, QAudioOutput, QMediaPlaylist
 import mysql.connector
 from mysql.connector import Error
 from functools import partial
@@ -211,7 +212,7 @@ class MainWindow(QMainWindow):
 
 
             for j in result2:
-                if not j[0].endswith('exercise_profile') and not j[0].endswith('heart_rate_profile') and  not j[0].endswith('weight_profile') and not j[0].endswith('sleep'):
+                if not j[0].endswith('exercise_profile') and not j[0].endswith('heart_rate_profile') and  not j[0].endswith('weight_profile') and not j[0].endswith('sleep') and not j[0].endswith('photos') and not j[0].endswith('sounds'):
                     if j != "Overview": 
                         label = QPushButton(j[0][2:])
                         label.clicked.connect(partial(self.assign_handle, j[0][j[0].rfind('_')+1:],j[0], result2))
@@ -251,6 +252,8 @@ class MainWindow(QMainWindow):
             self.GPS(table_name)
         if text == "profile":
             self.profile(table_name)
+        """ if text == "sounds":
+            self.sounds(table_name) """
         if text == "Overview":
             self.overview(all_tables_case)
 
@@ -588,7 +591,8 @@ class MainWindow(QMainWindow):
         webView.setHtml(data.getvalue().decode())
         return webView
         
-       
+    
+
 
     def profile(self,table_name):
         self.ui.label_11.setText("PROFILE")
@@ -599,8 +603,6 @@ class MainWindow(QMainWindow):
         self.cursor.execute(select_query)
         result = self.cursor.fetchall()
         print(result)
-
-        
         
         self.tabWidgetProfile = QTabWidget(self.ui.frame_8)
         self.tabWidgetProfile.setEnabled(True)
@@ -687,7 +689,7 @@ class MainWindow(QMainWindow):
         self.label_7.setFont(self.font1)
         self.label_7.setStyleSheet("color: white;")
         self.label_7.setText("Height:")
-        self.label_7.setGeometry(QRect(30, 90, 54, 16))
+        self.label_7.setGeometry(QRect(30, 160, 54, 16))
 
         self.lblHeight = QLabel(self.frame_2)
         self.lblHeight.setFont(self.font)
@@ -701,7 +703,7 @@ class MainWindow(QMainWindow):
         self.label_8.setFont(self.font1)
         self.label_8.setStyleSheet("color: white;")
         self.label_8.setText("Weight:")
-        self.label_8.setGeometry(QRect(30, 40, 54, 16))
+        self.label_8.setGeometry(QRect(30, 190, 54, 16))
 
         self.lblWeight = QLabel(self.frame_2)
         self.lblWeight.setFont(self.font)
@@ -742,7 +744,7 @@ class MainWindow(QMainWindow):
         self.frame_5.setFrameShadow(QFrame.Raised)
         self.labelphoto = QLabel(self.frame_5)
         self.labelphoto.setGeometry(QRect(60, 40, 256, 256))
-        pixmap = QPixmap('test\Avatar-Photo.png')
+        pixmap = QPixmap(self.getSounds(table_name.split("_")[0])[0][0])
         self.labelphoto.setPixmap(pixmap)
         #self.labelphoto.resize(pixmap.width(), pixmap.height())
         self.labelphoto.setScaledContents(1)
@@ -771,6 +773,85 @@ class MainWindow(QMainWindow):
         self.tabWidgetProfile.setCurrentIndex(0)
 
         self.tabWidgetProfile.setTabText(self.tabWidgetProfile.indexOf(self.tabProfile), QCoreApplication.translate("MainWindow", u"Overview", None))
+
+    def getSounds(self,case_name):
+        select_query = "SELECT `path` FROM `%s`" % (case_name+"_photos")
+        print(select_query)  
+        self.cursor.execute(select_query)
+        return self.cursor.fetchall()
+        
+
+
+    def sounds(self, table_name):
+        self.ui.label_11.setText("SOUNDS")
+        self.deleteLayout(self.ui.frame_8.layout())
+
+        select_query = "SELECT * FROM `%s`" % (table_name)
+        print(select_query)
+        self.cursor.execute(select_query)
+        result = self.cursor.fetchall()
+        print(result)
+        
+        self.tabWidgetProfile = QTabWidget(self.ui.frame_8)
+        self.tabWidgetProfile.setEnabled(True)
+        self.tabWidgetProfile.setStyleSheet(u"color: rgb(0, 0, 0);")
+        self.tabProfile = QWidget()
+        self.verticalLayout_5 = QVBoxLayout(self.tabProfile)
+        self.verticalLayout_5.setSpacing(0)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.frameProfile = QFrame(self.tabProfile)
+        self.frameProfile.setObjectName(u"frame")
+        sizePolicy2Profile = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy2Profile.setHorizontalStretch(0)
+        sizePolicy2Profile.setVerticalStretch(0)
+        sizePolicy2Profile.setHeightForWidth(self.frameProfile.sizePolicy().hasHeightForWidth())
+        self.frameProfile.setSizePolicy(sizePolicy2Profile)
+        self.frameProfile.setFrameShape(QFrame.StyledPanel)
+        self.frameProfile.setFrameShadow(QFrame.Raised)
+        self.frameProfile.setStyleSheet(u"background-color: rgb(61, 80, 95)")
+        self.verticalLayout_7 = QVBoxLayout(self.frameProfile)
+        self.verticalLayout_7.setSpacing(0)
+        self.verticalLayout_7.setObjectName(u"verticalLayout_7")
+        self.verticalLayout_7.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayoutProfile = QHBoxLayout()
+        self.horizontalLayoutProfile.setSpacing(0)
+        self.frame_2 = QFrame(self.frameProfile)
+        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Raised)
+
+        player = QMediaPlayer(self.frame_2)
+        player.setMedia(QUrl.fromLocalFile(result[0][0]))
+        player.setVolume(100)
+        player.play()
+
+
+        self.horizontalLayoutProfile.addWidget(self.frame_2)
+
+        self.frame_5 = QFrame(self.frameProfile)
+        self.frame_5.setObjectName(u"frame_5")
+        self.frame_5.setFrameShape(QFrame.StyledPanel)
+        self.frame_5.setFrameShadow(QFrame.Raised)
+        self.horizontalLayoutProfile.addWidget(self.frame_5)
+
+
+        self.verticalLayout_7.addLayout(self.horizontalLayoutProfile)
+
+
+        self.verticalLayout_5.addWidget(self.frameProfile)
+        
+
+        
+
+        self.tabWidgetProfile.addTab(self.tabProfile, "")
+        self.tabWidgetProfile.repaint()
+
+        self.ui.verticalLayout_4.addWidget(self.tabWidgetProfile)
+
+        self.tabWidgetProfile.setCurrentIndex(0)
+
+        self.tabWidgetProfile.setTabText(self.tabWidgetProfile.indexOf(self.tabProfile), QCoreApplication.translate("MainWindow", u"Overview", None))
+
 
     def overview(self,tables):
         self.ui.label_11.setText("OVERVIEW")
@@ -936,7 +1017,7 @@ class MainWindow(QMainWindow):
 
         self.labelphoto = QLabel(self.groupBox)
         self.labelphoto.setGeometry(QRect(400, 23, 256, 256))
-        pixmap = QPixmap('test\Avatar-Photo.png')
+        pixmap = QPixmap(self.photos[0][0][0])
         self.labelphoto.setPixmap(pixmap)
         self.labelphoto.setScaledContents(1)
         sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -1372,6 +1453,7 @@ class MainWindow(QMainWindow):
         self.activities = []
         self.body = []
         self.foods = []
+        self.photos = []
 
         for table in tables:
             select_query = ""
@@ -1466,7 +1548,16 @@ class MainWindow(QMainWindow):
                 else: 
                     self.user.append(list([("No record",)]))
                 print(self.user)
-
+            elif(table[0].endswith("photos")):
+                select_query = "SELECT `path` FROM `%s`" % (table[0])
+                print(select_query)  
+                self.cursor.execute(select_query)
+                result = self.cursor.fetchall()
+                if result:
+                    self.photos.append(result)
+                else: 
+                    self.photos.append([("No record",)])
+                print(self.photos)    
       
 
     def daily_overview_tab(self,tables):
@@ -1779,7 +1870,7 @@ class MainWindow(QMainWindow):
 
             self.labelphoto = QLabel(self.groupBox)
             self.labelphoto.setGeometry(QRect(230, 23, 240, 240))
-            pixmap = QPixmap('test\Avatar-Photo.png')
+            pixmap = QPixmap(self.photos[0][0][0])
             self.labelphoto.setPixmap(pixmap)
             self.labelphoto.setScaledContents(1)
             sizePolicy3 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)

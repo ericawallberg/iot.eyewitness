@@ -24,6 +24,7 @@ import json
 import enum
 from datetime import date
 from datetime import datetime
+import shutil
 
 
 USAGE = f"Usage: python {sys.argv[0]} [--help] | case_name artifacts_folder_path]"
@@ -64,17 +65,22 @@ def Main(args):
   xlsfiles = glob.glob(folder_path+"/*.xls")
   tcxfiles = glob.glob(folder_path+"/*.tcx")
   jsonfiles = glob.glob(folder_path+"/*.json")
+  pngfiles = glob.glob(folder_path+"/*.png")
+  wavfiles = glob.glob(folder_path+"/*.wav")
   print("EXCEL FILES : ", xlsfiles)
   print("TCX FILES : " ,  tcxfiles)
   print("JSON FILES : ",  jsonfiles)
-
+  print("PNG FILES: ",  pngfiles)
+  print("WAV FILES: ",  wavfiles)
 
   cursor.execute("SELECT id FROM cases WHERE name = %(case_name)s",{ 'case_name': case_name })
   id = str(cursor.fetchone()[0])
 
-  updateXLSfiles(xlsfiles,cursor, db,case_name,id)
+  #updateXLSfiles(xlsfiles,cursor, db,case_name,id)
   #updateTCXfiles(tcxfiles,cursor, db,case_name,id)
   #updateJSONfiles(jsonfiles, cursor, db, case_name, id)
+  #updatePNGfiles(pngfiles, cursor, db, case_name, id)
+  updateWAVfiles(wavfiles, cursor, db,case_name,id)
 
   return 
  
@@ -324,6 +330,8 @@ def updateJSONfiles(jsonfiles, cursor,db,case_name,case_id):
                                           'date': k['date'],
                                           'time': k['time']
                                           })
+      
+
 
       print(subdicts)
 
@@ -369,7 +377,47 @@ def updateJSONfiles(jsonfiles, cursor,db,case_name,case_id):
   
       f.close()
 
+def updatePNGfiles(pngfiles, cursor,db,case_name,case_id):
+
+  table_name = case_id + "_photos"
+  sql = """CREATE TABLE if not exists `%s`( path varchar(100) NOT NULL UNIQUE);""" % table_name  
+  cursor.execute(sql)   
+
+  save_path = 'C:\\Users\\User\\ioteyewitness_media\\photos\\'
+
+  for i in pngfiles:
+    name = i.split("\\")[1]
+    dest = os.path.abspath(save_path)+'\\'+name
+    if not os.path.exists(save_path+name):
+      try:
+        shutil.copyfile(os.path.abspath(i), dest)
+      except IOError as e:
+        os.makedirs(save_path)
+
+    query = """INSERT IGNORE INTO `%s`(path) VALUES ('%s');""" % (table_name, dest.replace("\\","\\\\"),)
+    cursor.execute(query)  
+    db.commit()
+          
       
+def updateWAVfiles(wavfiles, cursor,db,case_name,case_id):
+  table_name = case_id + "_sounds"
+  sql = """CREATE TABLE if not exists `%s`( path varchar(100) NOT NULL UNIQUE);""" % table_name  
+  cursor.execute(sql)   
+
+  save_path = 'C:\\Users\\User\\ioteyewitness_media\\sounds\\'
+
+  for i in wavfiles:
+    name = i.split("\\")[1]
+    dest = os.path.abspath(save_path)+'\\'+name
+    if not os.path.exists(save_path+name):
+      try:
+        shutil.copyfile(os.path.abspath(i), dest)
+      except IOError as e:
+        os.makedirs(save_path)
+
+    query = """INSERT IGNORE INTO `%s`(path) VALUES ('%s');""" % (table_name, dest.replace("\\","\\\\"),)
+    cursor.execute(query)  
+    db.commit()
 
 
 
@@ -384,18 +432,8 @@ def add_new_case(case_name,cursor, db):
     db.rollback()
 
 
-class ActivitiesTable(object):
-  def __init__(self, date, calories_burned, steps, distance, floors, m_sedentary, m_lightly_active, m_fairly_active, m_very_active, activity_calories):
-    self.date = date
-    self.calories_burned = calories_burned
-    self.steps = steps
-    self.distance = distance
-    self.floors = floors
-    self.m_sedentary = m_sedentary
-    self.m_lightly_active = m_lightly_active
-    self.m_fairly_active = m_fairly_active
-    self.m_very_active = m_very_active
-    self.activity_calories = activity_calories
+
+
  
 
 @dataclasses.dataclass
