@@ -76,10 +76,10 @@ def Main(args):
   cursor.execute("SELECT id FROM cases WHERE name = %(case_name)s",{ 'case_name': case_name })
   id = str(cursor.fetchone()[0])
 
-  #updateXLSfiles(xlsfiles,cursor, db,case_name,id)
-  #updateTCXfiles(tcxfiles,cursor, db,case_name,id)
-  #updateJSONfiles(jsonfiles, cursor, db, case_name, id)
-  #updatePNGfiles(pngfiles, cursor, db, case_name, id)
+  updateXLSfiles(xlsfiles,cursor, db,case_name,id)
+  updateTCXfiles(tcxfiles,cursor, db,case_name,id)
+  updateJSONfiles(jsonfiles, cursor, db, case_name, id)
+  updatePNGfiles(pngfiles, cursor, db, case_name, id)
   updateWAVfiles(wavfiles, cursor, db,case_name,id)
 
   return 
@@ -89,19 +89,15 @@ def Main(args):
 def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
   for i in xlsfiles:
     xls = xlrd.open_workbook(i, on_demand=True)
-    print(xls.sheet_names())
     sheets = []
     for k in xls.sheet_names():
       if "Log" not in k:
         sheets.append(k)
   
-    #print(sheets,"\n\n\n\n\n")
 
     df = pd.read_excel(i, sheet_name=sheets)
     demand_dict = {}
     for key, df in df.items():
-      print(key, df)
-      #print(df)
       demand_dict[key] = df
 
     print("--------------------------------")
@@ -109,22 +105,18 @@ def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
     short_name = i[i.find("\\")+len("\\"):i.rfind(".")]
 
     for label, content in demand_dict.items():
-     # print(label,content.columns)
       
       table_name = case_id + "_" + short_name + "_" + label
       table_name = table_name.replace("-","_");
       table_name = table_name.lower()
-      print(table_name)
       
       #mySql_insert_query = " INSERT INTO cases(name) VALUES ('%s') "
       #return
 
       sql = """CREATE TABLE if not exists `%s`(""" % table_name
 
-      print(content.columns)
       for i in content.columns:
         i=i.replace(" ","_")
-        print(i)
         if i == "Date":
           sql += """ %s varchar(45) NOT NULL UNIQUE,""" % i 
         else:
@@ -137,12 +129,10 @@ def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
       print(sql )
       cursor.execute(sql)   
 
-      print(content.columns)
      
 
       records = content.to_records(index=False)
       result = list(records)
-      #print(result)
       
       for x in result:
         query = """INSERT IGNORE INTO `%s`(""" % table_name
@@ -153,7 +143,6 @@ def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
         query = query[:-1:]
         query += ") VALUES ("
 
-        #print(x)
         for i in x:
           query += """ '%s',""" % i
 
@@ -169,24 +158,19 @@ def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
 def updateTCXfiles(tcxfiles, cursor,db,case_name,case_id):
   for i in tcxfiles:
     column_names = []
-    #print(dir(tcxparser.TCXParser))
     for k in dir(tcxparser.TCXParser(i)):
       if not k.startswith("_"):
         column_names.append(k)
 
-    print(column_names)
 
     short_name = i[i.find("\\")+len("\\"):i.rfind(".")]
 
     table_name = case_id + "_" + short_name + "_gps"
     table_name = table_name.replace("-","_");
     table_name = table_name.lower()
-    print(table_name)
 
     ###########INSERTING DATA INTO CURRENT TABLE##########
     tcx = tcxparser.TCXParser(i)
-    #print(">>>>>",vars(tcx))
-    print(tcx)
     dict = {}
     for k in dir(tcx):
       try:
@@ -195,14 +179,6 @@ def updateTCXfiles(tcxfiles, cursor,db,case_name,case_id):
       except Exception as err:
         print(k, " has no attribute")
 
-      """ try:
-        if not inspect.ismethod(getattr(tcx, k))  and not k.startswith("_"):
-          if not type(getattr(tcx, k)).__name__ == "ObjectifiedElement":
-            dict[k] = getattr(tcx, k)
-            print(k, getattr(tcx, k))   
-      except Exception as err:
-        print(k, " has no attribute")
-      """
     print(dict)
     sql = """CREATE TABLE if not exists `%s`(""" % table_name
     for k in dict.keys():
@@ -219,7 +195,6 @@ def updateTCXfiles(tcxfiles, cursor,db,case_name,case_id):
     cursor.execute(sql)
     
     query = """INSERT IGNORE INTO `%s`(""" % table_name
-    print(len(dict.keys()))
     for key in dict.keys():
       key=key.replace(" ","_")
       query += """ %s,""" % key 
@@ -267,7 +242,6 @@ def updateJSONfiles(jsonfiles, cursor,db,case_name,case_id):
       table_name = case_id + "_" + short_name + "_profile"
       table_name = table_name.replace("-","_");
       table_name = table_name.lower()
-      print(table_name)
 
       subdicts=[]
       if type == TypesOfTables.user:
@@ -333,7 +307,6 @@ def updateJSONfiles(jsonfiles, cursor,db,case_name,case_id):
       
 
 
-      print(subdicts)
 
   
       sql = """CREATE TABLE if not exists `%s`(""" % table_name
@@ -361,7 +334,6 @@ def updateJSONfiles(jsonfiles, cursor,db,case_name,case_id):
         query = query[:-1:]
         query += ") VALUES ("
 
-        #print(x)
         for value in i:
           query += """ '%s',""" % i[value]
 
