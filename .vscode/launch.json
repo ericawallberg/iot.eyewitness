@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "args": ["homicidio_alberto_simoes","./test"],
+            "args": ["homicidio_alberto_simoes","./artifacts"],
             "console": "integratedTerminal",
             "justMyCode": true
         }

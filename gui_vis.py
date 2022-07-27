@@ -569,14 +569,12 @@ class MainWindow(QMainWindow):
         
 
 
-    def printMap(self, lat,lon, w='100%',h='100%'):
+    def printMap(self, lat,lon,x=-1,y=-1,w=-1,h=-1):
         coordinate = (lat, lon)
         m = folium.Map(
         	tiles='Stamen Terrain',
         	zoom_start=13,
-        	location=coordinate,
-            width=w,
-            height = h
+        	location=coordinate
         )
 
         folium.Marker(
@@ -588,7 +586,10 @@ class MainWindow(QMainWindow):
         m.save(data, close_file=False)
 
         webView = QWebEngineView()
+        if x!=-1:
+            webView.setGeometry(QRect(x, y, w, h))
         webView.setHtml(data.getvalue().decode())
+        
         return webView
         
     
@@ -1572,37 +1573,44 @@ class MainWindow(QMainWindow):
         self.lblADS.setText(self.user[0][0][7])
 
         print(self.activities)
-        if self.activities[0][0] == ("No record",):
-            for i in range(9):
-                self.activities[0][0]+=("No record",)
-        print(self.activities)
 
-        if self.activities[0][0][1] == "No record":
-            self.lblCaloriesBurned.setText(self.activities[0][0][1])
+        self.usable_list_activities =()
+        
+        for i in self.activities:
+            if i[0] != ("No record",):
+                self.usable_list_activities = i[0]
+        if not self.usable_list_activities:
+            for k in range(9):
+                self.usable_list_activities+=("No record",)
+
+        if self.usable_list_activities[1] == "No record":
+            self.lblCaloriesBurned.setText(self.usable_list_activities[1])
         else:
-            self.lblCaloriesBurned.setText(self.activities[0][0][1]+" kcals")
-        self.lblSteps.setText(self.activities[0][0][2])
-
-        if self.activities[0][0][3]== "No record":
-            self.lblDistance.setText(self.activities[0][0][3])
+            self.lblCaloriesBurned.setText(self.usable_list_activities[1]+" kcals")
+        self.lblSteps.setText(self.usable_list_activities[2])
+        if self.usable_list_activities[3]== "No record":
+            self.lblDistance.setText(self.usable_list_activities[3])
         else:
-            self.lblDistance.setText(self.activities[0][0][3]+" miles")
-        self.lblFloors.setText(self.activities[0][0][4])
+            self.lblDistance.setText(self.usable_list_activities[3]+" miles")
+        self.lblFloors.setText(self.usable_list_activities[4])
 
 
-        print(self.body)
-        if self.body[0][0] == ("No record",):
-            for i in range(4):
-                self.body[0][0]+=("No record",)
-        print(self.body)
+        self.usable_list_body =()
+        
+        for i in self.body:
+            if i[0] != ("No record",):
+                self.usable_list_body = i[0]
+        if not self.usable_list_body:
+            for k in range(4):
+                self.usable_list_body+=("No record",)
 
-        if self.body[0][0][1]== "No record":
-            self.lblWeight.setText(self.body[0][0][1])
+        if self.usable_list_body[1]== "No record":
+            self.lblWeight.setText(self.usable_list_body[1])
         else:
-            self.lblWeight.setText(self.body[0][0][1]+" lbs")
+            self.lblWeight.setText(self.usable_list_body[1]+" lbs")
 
-        self.lblBMI.setText(self.body[0][0][3])
-        self.lblFat.setText(self.body[0][0][2])
+        self.lblBMI.setText(self.usable_list_body[2])
+        self.lblFat.setText(self.usable_list_body[3])
 
         self.sleep_pie_chart()
 
@@ -1684,8 +1692,8 @@ class MainWindow(QMainWindow):
         for i in self.gps:
             for k in i:
                 if k != ('No record',):
-                    self.custom_widget._add_timestamp(QTime.fromString(k[17].split('T')[1][:5],"hh:mm"),ArtifactType.gps,k)
-                    print(">>",k[17].split('T')[1][:5])
+                    self.custom_widget._add_timestamp(QTime.fromString(k[21].split('T')[1][:5],"hh:mm"),ArtifactType.gps,k)
+                    print(">>",k[21].split('T')[1][:5])
 
     
     def change_right_state(self, button):
@@ -1751,8 +1759,7 @@ class MainWindow(QMainWindow):
                 """ fig = Figure(width=200, height=400)
                 m = folium.Map(location=[button.query[13],button.query[14]], zoom_start=13)
                 fig.add_child(m) """
-                overview_map = self.printMap(button.query[13],button.query[14],'75%')
-                overview_map.setGeometry(QRect(30, 5, 59, 16))
+                overview_map = self.printMap(button.query[17],button.query[18],30, 5, 59, 16)
                 self.frame_13.layout().addWidget(overview_map)
                 QApplication.processEvents()
             else:
@@ -1890,7 +1897,7 @@ class MainWindow(QMainWindow):
             elif button.type == ArtifactType.exercise:
                 self.lblright_state.setText("Started at "+button.time.toString("hh:mm")+", ended at "+ button.time.addMSecs(int(button.query[3])).toString("hh:mm")+". \n\nDuration of: " + str(timedelta(milliseconds=int(button.query[3])))+".")
             elif button.type == ArtifactType.gps:
-                self.lblright_state.setText("Started at "+button.time.toString("hh:mm")+", ended at "+ button.k[17].split('T')[1][:5]+".")
+                self.lblright_state.setText("Started at "+button.time.toString("hh:mm")+", ended at "+ button.query[9].split('T')[1][:5]+".")
                 #QTime.fromString(k[17].split('T')[1][:5],"hh:mm")
             #self.pushButton_4.animateClick()
         elif self.currentButton == 4:    #More Details

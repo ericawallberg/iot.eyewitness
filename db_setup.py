@@ -157,14 +157,8 @@ def updateXLSfiles(xlsfiles, cursor,db,case_name,case_id):
 
 def updateTCXfiles(tcxfiles, cursor,db,case_name,case_id):
   for i in tcxfiles:
-    column_names = []
-    for k in dir(tcxparser.TCXParser(i)):
-      if not k.startswith("_"):
-        column_names.append(k)
-
 
     short_name = i[i.find("\\")+len("\\"):i.rfind(".")]
-
     table_name = case_id + "_" + short_name + "_gps"
     table_name = table_name.replace("-","_");
     table_name = table_name.lower()
@@ -172,13 +166,16 @@ def updateTCXfiles(tcxfiles, cursor,db,case_name,case_id):
     ###########INSERTING DATA INTO CURRENT TABLE##########
     tcx = tcxparser.TCXParser(i)
     dict = {}
+
     for k in dir(tcx):
       try:
+        if not inspect.ismethod(getattr(tcx, k))  and not k.startswith("_"):
+          if not type(getattr(tcx, k)).__name__ == "ObjectifiedElement":
             dict[k] = getattr(tcx, k)
             print(k, getattr(tcx, k))   
       except Exception as err:
         print(k, " has no attribute")
-
+    
     print(dict)
     sql = """CREATE TABLE if not exists `%s`(""" % table_name
     for k in dict.keys():
